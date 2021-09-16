@@ -45,7 +45,10 @@ const Login = () => {
                     </label>
                     <br />
                     <input type="submit" value="Login" />
-                    <NavLink to="/signup" exact ><button>Sign Up</button></NavLink>
+                    <div className="navCont" style={{display:"flex"}}>
+                        <p style={{marginRight:"5px"}} >Create An Account?</p>
+                        <NavLink to="/signup" exact ><button>Sign Up</button></NavLink>
+                    </div>
                 </form>
             </div>
         </Fragment>

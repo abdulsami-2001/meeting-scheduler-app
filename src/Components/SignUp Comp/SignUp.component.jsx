@@ -1,8 +1,10 @@
 import React, { Fragment,useState } from 'react'
 import Styles from './SignUp.module.css'
-import {NavLink} from 'react-router-dom'
+import {NavLink,useHistory} from 'react-router-dom'
 
 const SignUp = () => {
+
+    let history = useHistory()
 
     let [InputFields, setInputFields] = useState({
         FullName:"",
@@ -17,19 +19,25 @@ const SignUp = () => {
             ...InputFields,
             [e.target.name]: e.target.value
         })
+
+       
+        
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
-
-        
         setInputFields({
             ...InputFields,
             FullName:"",
             EmailField: "",
             PasswordField: ""
         })
+
+        setTimeout(() => {
+            
+            history.push("/login")
+        }, 3000);
+
     }
 
     return (
@@ -52,7 +60,10 @@ const SignUp = () => {
                     </label>
                     <br />
                     <input type="submit" value="SignUp" />
-                    <NavLink to="/login" exact ><button>Login</button></NavLink>
+                    <div className="navCont" style={{display:"flex"}}>
+                        <p style={{marginRight:"5px"}} >Have An Account?</p>
+                        <NavLink to="/login" exact ><button >Login</button></NavLink>
+                    </div>
                 </form>
             </div>
         </Fragment>
