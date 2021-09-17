@@ -1,13 +1,22 @@
 import React,{useState} from 'react'
-import Login from '../Login Comp/Login.component'
 import {Switch, BrowserRouter, Route} from 'react-router-dom'
+import Login from '../Login Comp/Login.component'
 import SignUp from '../SignUp Comp/SignUp.component'
+import Team from '../Team Comp/Team.component'
+import Error from '../Error Comp/Error.component'
 
 const MeetingApp = () => {
 
+    // let history = useHistory()
+
+    // Main State
+
     let [User_State,setUser_State] = useState({
-        UserData: [],
+        UserData: [{}],
     });
+    let {UserData} = User_State;
+
+    // Main State
 
 
     // Login Saaman
@@ -48,7 +57,7 @@ const MeetingApp = () => {
         })
     }
 
-    const SignUp_handleSubmit = (e) => {
+    const SignUp_handleSubmit = (e,history) => {
         e.preventDefault()
 
         setUser_State({
@@ -62,15 +71,28 @@ const MeetingApp = () => {
             SignUp_EmailField: "",
             SignUp_PasswordField: ""
         })
+
+        history.push("/teams");
+
     }
     // SignUp Saaman
-
+    console.log(UserData)
     return (
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" render={()=><Login Login_handleSubmit={Login_handleSubmit} Login_handleInputs={Login_handleInputs} Login_InputFields={Login_InputFields} />}  />
                     <Route exact path="/login" render={()=><Login Login_handleSubmit={Login_handleSubmit} Login_handleInputs={Login_handleInputs} Login_InputFields={Login_InputFields} />}  />
                     <Route exact path="/signup" render={()=><SignUp SignUp_handleSubmit={SignUp_handleSubmit} SignUp_handleInputs={SignUp_handleInputs} SignUp_InputFields={SignUp_InputFields}  />}  />
+                    <Route exact path="/teams">
+                        {UserData.map((item)=>{
+                            if(item.isLoggedIn){
+                                return <h1 key="52">User Is Logged In</h1>
+                            }else{
+                                return <h1 key="852">User Isn't Logged In</h1>
+                            }
+                        })}
+                    </Route>
+                    <Route component={Error} />
                 </Switch>
             </BrowserRouter>
     )

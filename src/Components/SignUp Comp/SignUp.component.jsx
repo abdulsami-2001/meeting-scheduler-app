@@ -1,14 +1,15 @@
 import React, { Fragment} from 'react'
 import Styles from './SignUp.module.css'
-import {NavLink} from 'react-router-dom'
+import {NavLink,useHistory} from 'react-router-dom'
 
 const SignUp = (props) => {
+    let history = useHistory()
     let {SignUp_InputFields,SignUp_handleSubmit,SignUp_handleInputs} = props
     let {SignUp_EmailField,SignUp_PasswordField, SignUp_FullName} = SignUp_InputFields
     return (
         <Fragment>
             <div className={Styles.parentCont}>
-                <form className={Styles.signUpFormCont} onSubmit={(e)=>SignUp_handleSubmit(e)}>
+                <form className={Styles.signUpFormCont} onSubmit={(e)=>SignUp_handleSubmit(e,history)}>
                     <label htmlFor="Full Name">
                         <h3 className={Styles.headingText} >Full Name*:</h3>
                         <input type="text" size="60" placeholder="John" name='SignUp_FullName' required value={SignUp_FullName} onChange={(e)=>SignUp_handleInputs(e)} />
