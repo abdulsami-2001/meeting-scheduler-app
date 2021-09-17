@@ -1,47 +1,24 @@
-import React, { Fragment,useState } from 'react'
+import React, { Fragment} from 'react'
 import Styles from './Login.module.css'
 import {NavLink} from 'react-router-dom'
 
-const Login = () => {
+const Login = (props) => {
 
-    let [InputFields, setInputFields] = useState({
-        EmailField: "",
-        PasswordField: ""
-    })
-
-    let {EmailField,PasswordField} = InputFields
-
-    const handleInputs = (e) => {
-        setInputFields({
-            ...InputFields,
-            [e.target.name]: e.target.value
-        })
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-
-        
-        setInputFields({
-            ...InputFields,
-            EmailField: "",
-            PasswordField: ""
-        })
-    }
+    let {Login_handleSubmit,Login_handleInputs,Login_InputFields} = props
+    let {Login_EmailField,Login_PasswordField} = Login_InputFields
 
     return (
         <Fragment>
             <div className={Styles.parentCont}>
-                <form className={Styles.loginFormCont} onSubmit={handleSubmit}>
+                <form className={Styles.loginFormCont} onSubmit={(e)=>Login_handleSubmit(e)}>
                     <label htmlFor="Email Address">
                         <h3 className={Styles.headingText} >Email*:</h3>
-                        <input type="email" size="60" placeholder="john@abc.com" name='EmailField' required value={EmailField} onChange={handleInputs} />
+                        <input type="email" size="60" placeholder="john@abc.com" name='Login_EmailField' required value={Login_EmailField} onChange={(e)=>Login_handleInputs(e)} />
                     </label>
                     <br />
                     <label htmlFor="Password">
                         <h3 className={Styles.headingText} >Password*:</h3>
-                        <input type="password" size="60" name='PasswordField' placeholder="Your passowrd" required value={PasswordField} onChange={handleInputs} />
+                        <input type="password" size="60" name='Login_PasswordField' placeholder="Your passowrd" required value={Login_PasswordField} onChange={(e)=>Login_handleInputs(e)} />
                     </label>
                     <br />
                     <input type="submit" value="Login" />
