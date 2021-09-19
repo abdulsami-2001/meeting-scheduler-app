@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import {Switch, BrowserRouter, Route} from 'react-router-dom'
 import Login from '../Login Comp/Login.component'
 import SignUp from '../SignUp Comp/SignUp.component'
-import Team from '../Team Comp/Team.component'
+import Team from '../Team Comp/Teams.component'
 import Error from '../Error Comp/Error.component'
 
 const MeetingApp = () => {
@@ -83,15 +83,7 @@ const MeetingApp = () => {
                     <Route exact path="/" render={()=><Login Login_handleSubmit={Login_handleSubmit} Login_handleInputs={Login_handleInputs} Login_InputFields={Login_InputFields} />}  />
                     <Route exact path="/login" render={()=><Login Login_handleSubmit={Login_handleSubmit} Login_handleInputs={Login_handleInputs} Login_InputFields={Login_InputFields} />}  />
                     <Route exact path="/signup" render={()=><SignUp SignUp_handleSubmit={SignUp_handleSubmit} SignUp_handleInputs={SignUp_handleInputs} SignUp_InputFields={SignUp_InputFields}  />}  />
-                    <Route exact path="/teams">
-                        {UserData.map((item)=>{
-                            if(item.isLoggedIn){
-                                return <h1 key="52">User Is Logged In</h1>
-                            }else{
-                                return <h1 key="852">User Isn't Logged In</h1>
-                            }
-                        })}
-                    </Route>
+                    <Route exact path="/teams" render={()=><Team UserData={UserData} />} />
                     <Route component={Error} />
                 </Switch>
             </BrowserRouter>
