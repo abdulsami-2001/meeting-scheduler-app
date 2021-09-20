@@ -13,3 +13,43 @@
     background-color: coral;
     min-height: 100vh;
 }
+
+.btn{
+    color: white;
+    border: none;
+    background-color: rgb(67, 67, 161);
+    padding: 10px;
+    border-radius: 50%;
+    width: 56px;
+    text-align: center;
+    font-size: xx-large;
+}
+.createTeamCont{
+    position: fixed;
+    bottom: 70px;
+    right: 70px;
+}
+
+.showCNT{
+    display: inline;
+    position: relative;
+    bottom: 5px;
+    right: 5px;
+}
+
+.createTeamCont:hover span{
+    display: inline;
+    color: white;
+}
+
+.CNTModal{
+    display: block;
+    position: sticky;
+    bottom: 40vh;
+    width: 400px;
+    height: 200px;
+}
+
+.CNTModalHide{
+    display: none;
+}
