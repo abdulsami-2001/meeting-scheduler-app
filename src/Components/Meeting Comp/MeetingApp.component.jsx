@@ -78,15 +78,15 @@ const MeetingApp = () => {
     // SignUp Saaman
     console.log(UserData)
     return (
-            <BrowserRouter>
-                <Switch>
-                    <Route exact path="/" render={()=><Login Login_handleSubmit={Login_handleSubmit} Login_handleInputs={Login_handleInputs} Login_InputFields={Login_InputFields} />}  />
-                    <Route exact path="/login" render={()=><Login Login_handleSubmit={Login_handleSubmit} Login_handleInputs={Login_handleInputs} Login_InputFields={Login_InputFields} />}  />
-                    <Route exact path="/signup" render={()=><SignUp SignUp_handleSubmit={SignUp_handleSubmit} SignUp_handleInputs={SignUp_handleInputs} SignUp_InputFields={SignUp_InputFields}  />}  />
-                    <Route exact path="/teams" render={()=><Team UserData={UserData} />} />
-                    <Route component={Error} />
-                </Switch>
-            </BrowserRouter>
+        <BrowserRouter>
+            <Switch>
+                <Route exact path="/" render={()=><Login Login_handleSubmit={Login_handleSubmit} Login_handleInputs={Login_handleInputs} Login_InputFields={Login_InputFields} />}  />
+                <Route exact path="/login" render={()=><Login Login_handleSubmit={Login_handleSubmit} Login_handleInputs={Login_handleInputs} Login_InputFields={Login_InputFields} />}  />
+                <Route exact path="/signup" render={()=><SignUp SignUp_handleSubmit={SignUp_handleSubmit} SignUp_handleInputs={SignUp_handleInputs} SignUp_InputFields={SignUp_InputFields}  />}  />
+                <Route exact path="/teams" render={()=><Team UserData={UserData} />} />
+                <Route component={Error} />
+            </Switch>
+        </BrowserRouter>
     )
 }
 

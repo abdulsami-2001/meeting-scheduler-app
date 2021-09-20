@@ -1,0 +1,13 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    z-index: 0px;
+}
+
+.parentCont{
+    padding: 5px 12px 5px 12px;
+    border: 2px solid black;
+    width: 40vw;
+    height: 72px;
+    margin: 20px;
+}

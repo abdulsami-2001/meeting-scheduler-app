@@ -1,0 +1,15 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    z-index: 0px;
+}
+
+
+.parentCont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: coral;
+    min-height: 100vh;
+}
