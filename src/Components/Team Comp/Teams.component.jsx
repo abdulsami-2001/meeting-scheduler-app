@@ -1,43 +1,28 @@
-import React,{useState} from 'react'
+import React from 'react'
 import TeamInfo from './TeamInfo.component'
-import Styles from './Teams.module.css'
-import CreateNTeam from './CreateNTeam.component'
+// import CreateNTeam from './CreateNTeam.component'
 
 const Team = (props) => {
-    let [ShowModal,setShowModal] = useState(false)
-    let {UserData,CNTInputFields_handleSubmit,CNTInputFields_handleChange,CNTInputFields} = props
-
-    const CNTInputFields_handleCancel = () =>{
-        setShowModal(false)
+    let {User_Data,CNTInputFields_handleSubmit,CNTInputFields_handleChange,CNTInputFields} = props
+    
+    
+    if(User_Data.length !== 0){
+        return User_Data.map((item)=>{
+            let {UserTeams,UserDetails} = item;
+            if(UserDetails.isLoggedIn && UserTeams.length === 0){
+                return <TeamInfo CNTInputFields_handleSubmit={CNTInputFields_handleSubmit} CNTInputFields_handleChange={CNTInputFields_handleChange} CNTInputFields={CNTInputFields}  key={89979} />
+            }else if(UserDetails.isLoggedIn && UserTeams.length !== 0){
+                return <h1 key={Date.now()}>waah bhaee</h1>
+            }else{
+                return <h1 key={Date.now()}>You're not login</h1>
+            }
+        })
+        
+    }else{
+        return <h1>Login krdo</h1>
     }
-
-    return (UserData.map(({isLoggedIn})=>{
-        if(true){
-            return(
-                <div className={Styles.parentCont}>
-                    <h1 style={{marginTop:"40px",   marginBottom:"20px" }} >Teams You Own</h1>                    
-                    <TeamInfo teamName="Lab" members={["Bishra",  "Sam", "Majid", "Sufyan", "Erum"]} />
-                    <TeamInfo teamName="Escape" members={["Maheen",  "Sam Said!", "Majid", "Aadrish", "Sufyan", "Erum"]} />
-                    <TeamInfo teamName="Escape" members={["Maheen",  "Sam Said!", "Majid", "Aadrish", "Sufyan", "Erum"]} />
-                    <TeamInfo teamName="Escape" members={["Maheen",  "Sam Said!", "Majid", "Aadrish", "Sufyan", "Erum"]} />
-                    <h1 style={{marginTop:"40px", marginBottom:"20px" }} >Teams You're Part Of</h1>
-                    <TeamInfo teamName="Flurt" members={["Laiba Iqbal",  "Sam", "Majid","razak", "Aadrish", "Sufyan", "Erum"]} />
-                    <TeamInfo teamName="Flurt" members={["Laiba Iqbal",  "Sam", "Majid","razak", "Aadrish", "Sufyan", "Erum"]} />
-                    <TeamInfo teamName="Flurt" members={["Laiba Iqbal",  "Sam", "Majid","razak", "Aadrish", "Sufyan", "Erum"]} />
-                    <TeamInfo teamName="Flurt" members={["Laiba Iqbal",  "Sam", "Majid","razak", "Aadrish", "Sufyan", "Erum"]} />
-                    <div className={Styles.createTeamCont}>
-                        <span className={Styles.showCNT} >Create New Team</span>
-                        <button onClick={()=>{setShowModal(true)}} className={Styles.btn}>+</button>
-                    </div>
-                    <div className={ ShowModal ?  Styles.CNTModal : Styles.CNTModalHide }>
-                        <CreateNTeam CNTInputFields_handleCancel={CNTInputFields_handleCancel} CNTInputFields_handleSubmit={CNTInputFields_handleSubmit} CNTInputFields_handleChange={CNTInputFields_handleChange} CNTInputFields={CNTInputFields}/>
-                    </div>
-                </div>
-            )
-        }else{
-            return <h1 key="7978">Chl 1-2 ka 4 ho</h1>
-        }
-    }))
+    
+    
 }
 
 export default Team

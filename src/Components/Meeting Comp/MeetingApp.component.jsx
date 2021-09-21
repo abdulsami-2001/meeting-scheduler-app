@@ -10,10 +10,7 @@ const MeetingApp = () => {
 
     // Main State
 
-    let [User_State,setUser_State] = useState({
-        UserData: [{}],
-    });
-    let {UserData} = User_State;
+        let [User_Data,setUser_Data] = useState([]);
 
     // Main State
 
@@ -33,18 +30,13 @@ const MeetingApp = () => {
 
 
         const CNTInputFields_handleSubmit = (e, CNTInputFields_handleCancel) => {
-            e.preventDefault()
-
-            setUser_State({
-                ...User_State,
-                UserData: [{...UserData[0], ...CNTInputFields}]
-            })
+            e.preventDefault();
 
             SetCNTInputFields({
                 TeamName: "",
                 EmailOfTeamMembers: ""
             })
-            CNTInputFields_handleCancel()
+            CNTInputFields_handleCancel();
         }
     
     // Create New Team
@@ -80,6 +72,8 @@ const MeetingApp = () => {
         SignUp_PasswordField: ""
     })
 
+    let {SignUp_FullName,SignUp_EmailField,SignUp_PasswordField} = SignUp_InputFields
+
     const SignUp_handleInputs = (e) => {
         setSignUp_InputFields({
             ...SignUp_InputFields,
@@ -90,11 +84,22 @@ const MeetingApp = () => {
     const SignUp_handleSubmit = (e,history) => {
         e.preventDefault()
 
-        setUser_State({
-            ...User_State,
-            UserData:[{...SignUp_InputFields, isLoggedIn: true}]
-        })
+        setUser_Data([
+            ...User_Data,
+            {
+                UserDetails: {
 
+                    User_FullName: SignUp_FullName,
+                    User_EmailAddress: SignUp_EmailField,
+                    UserPassword:SignUp_PasswordField,
+                    isLoggedIn: true,
+                    User_Key: Date.now(),
+                },
+                UserTeams: []
+            }
+        ])
+        
+       
         setSignUp_InputFields({
             ...SignUp_InputFields,
             SignUp_FullName:"",
@@ -112,7 +117,7 @@ const MeetingApp = () => {
                 <Route exact path="/" render={()=><Login Login_handleSubmit={Login_handleSubmit} Login_handleInputs={Login_handleInputs} Login_InputFields={Login_InputFields} />}  />
                 <Route exact path="/login" render={()=><Login Login_handleSubmit={Login_handleSubmit} Login_handleInputs={Login_handleInputs} Login_InputFields={Login_InputFields} />}  />
                 <Route exact path="/signup" render={()=><SignUp SignUp_handleSubmit={SignUp_handleSubmit} SignUp_handleInputs={SignUp_handleInputs} SignUp_InputFields={SignUp_InputFields}  />}  />
-                <Route exact path="/teams" render={()=><Team CNTInputFields_handleSubmit={CNTInputFields_handleSubmit} CNTInputFields_handleChange={CNTInputFields_handleChange} CNTInputFields={CNTInputFields} UserData={UserData} />} />
+                <Route exact path="/teams" render={()=><Team User_Data={User_Data}  CNTInputFields_handleSubmit={CNTInputFields_handleSubmit} CNTInputFields_handleChange={CNTInputFields_handleChange} CNTInputFields={CNTInputFields} />} />
                 <Route component={Error} />
             </Switch>
         </BrowserRouter>
