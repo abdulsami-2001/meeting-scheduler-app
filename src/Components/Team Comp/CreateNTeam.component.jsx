@@ -1,8 +1,53 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Styles from './CreateNTeam.module.css'
 const CreateNTeam = (props) => {
-    let {CNTInputFields_handleSubmit,CNTInputFields_handleChange,CNTInputFields,CNTInputFields_handleCancel} = props
-    let {TeamName,EmailOfTeamMembers} = CNTInputFields
+    let {CNTInputFields_handleCancel,User_Data,setUser_Data} = props
+
+    // Create New Team
+        let [CNTInputFields,SetCNTInputFields] = useState({
+            TeamName: "",
+            EmailOfTeamMembers: ""
+        })
+
+        let {TeamName,EmailOfTeamMembers} = CNTInputFields
+
+        const CNTInputFields_handleChange = (e) => {
+           SetCNTInputFields({
+               ...CNTInputFields,
+               [e.target.name]: e.target.value
+           })
+        }
+
+
+            const LoggedInUser = User_Data.filter(({UserDetails})=>{
+                return UserDetails.isLoggedIn === true
+            })
+
+            const NotLoggedInUser = User_Data.filter(({UserDetails})=>{
+                return UserDetails.isLoggedIn === false
+            })
+
+        const CNTInputFields_handleSubmit = (e, CNTInputFields_handleCancel) => {
+            e.preventDefault();
+
+            LoggedInUser[0].UserTeams = [...User_Data[0].UserTeams, {TeamName: TeamName,EmailOfTeamMembers:EmailOfTeamMembers,TeamKey:Date.now(),TeamOwner_Key: LoggedInUser[0].UserDetails.User_Key }]
+
+            setUser_Data([
+                ...NotLoggedInUser,
+                ...LoggedInUser
+
+            ])
+
+            SetCNTInputFields({
+                TeamName: "",
+                EmailOfTeamMembers: ""
+            })
+            CNTInputFields_handleCancel();
+        }
+    
+    // Create New Team
+
+
     return (
         <>
             <div className={Styles.parentCont}>

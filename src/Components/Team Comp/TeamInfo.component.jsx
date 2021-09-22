@@ -1,17 +1,29 @@
 import React,{useState} from 'react'
-import Styles1 from './TeamInfo.module.css'
+// import Styles1 from './TeamInfo.module.css'
 import Styles from './Teams.module.css'
 import CreateNTeam from './CreateNTeam.component'
 
 
 const TeamInfo = (props) => {
-    let {CNTInputFields_handleSubmit,CNTInputFields_handleChange,CNTInputFields} = props;
+
+    let {setUser_Data, User_Data} = props
+
     let [ShowModal,setShowModal] = useState(false)
     const CNTInputFields_handleCancel = () =>{
         setShowModal(false)
     }
+    
+    const LoggedInUser = User_Data.filter(({UserDetails})=>{
+        return UserDetails.isLoggedIn === true
+    })
 
-    if(props.UserTeams === undefined){
+    const UserTeamsArray =  LoggedInUser.map(({UserTeams})=>{
+        return UserTeams
+    })
+    console.log(...UserTeamsArray)
+    console.log(UserTeamsArray.length)
+
+    if(UserTeamsArray[0].length === 0){
 
         return(
             <div className={Styles.parentCont}>
@@ -21,12 +33,19 @@ const TeamInfo = (props) => {
                     <button onClick={()=>{setShowModal(true)}} className={Styles.btn}>+</button>
                 </div>
                 <div className={ ShowModal ?  Styles.CNTModal : Styles.CNTModalHide }>
-                    <CreateNTeam CNTInputFields_handleCancel={CNTInputFields_handleCancel} CNTInputFields_handleSubmit={CNTInputFields_handleSubmit} CNTInputFields_handleChange={CNTInputFields_handleChange} CNTInputFields={CNTInputFields}/>
+                    <CreateNTeam User_Data={User_Data} setUser_Data={setUser_Data} CNTInputFields_handleCancel={CNTInputFields_handleCancel} />
                 </div>
             </div>
         )
     }else{
-        return <h2>oo hoo</h2>
+        
+        return ( <div key={Date.now()} className={ true ?  Styles.CNTModal : Styles.CNTModalHide }>
+                    {UserTeamsArray[0].map(({TeamName, TeamKey})=>{
+                        return <h1 key={TeamKey} >{TeamName} h</h1>
+                    })}
+                    <CreateNTeam User_Data={User_Data} setUser_Data={setUser_Data} CNTInputFields_handleCancel={CNTInputFields_handleCancel} />
+                </div>)
+        
     }
     
     
@@ -35,12 +54,4 @@ const TeamInfo = (props) => {
 export default TeamInfo
 
 
-/*
-return (
-    <div className={Styles1.parentCont}>
-        <h3>{teamName}</h3>
-        <br />
-        <b>Members: </b>  
-        {(members) ? ((members.length > 2) ?  (<span>{members[0]}, {members[1]} & {(members.length) - 2} others</span> ) : (<span>{members[0]} & {members[1]}</span> ))  : ( <span>No members</span> )}
-    </div>
-) */
+
