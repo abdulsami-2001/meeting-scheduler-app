@@ -93,7 +93,7 @@ const MeetingApp = () => {
                 <Route exact path="/login" render={()=><Login Login_handleSubmit={Login_handleSubmit} Login_handleInputs={Login_handleInputs} Login_InputFields={Login_InputFields} />}  />
                 <Route exact path="/signup" render={()=><SignUp SignUp_handleSubmit={SignUp_handleSubmit} SignUp_handleInputs={SignUp_handleInputs} SignUp_InputFields={SignUp_InputFields}  />}  />
                 <Route exact path="/teams" render={()=><Team User_Data={User_Data} setUser_Data={setUser_Data}  />} />
-                <Route component={Error} />
+                <Route  component={Error} />
             </Switch>
         </BrowserRouter>
     )
